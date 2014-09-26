@@ -1,0 +1,22 @@
+<?php include "ppcfg.php" ?>
+<?php
+$defaulturl = "";
+@list($type, $id) = explode(",", $defaulturl);
+if (is_numeric($id)) { // 2 arguments
+	if (strtolower($type) == "category") {
+		$url = EWPP_CART_LIST_PAGE . "?" . EWPP_CATEGORY_ID . "=" . $id;
+	} else if (strtolower($type) == "menu") {
+		$url = EWPP_MENU_PAGE . "?" . EWPP_MENU_ID . "=" . $id;
+	} else {
+		$url = EWPP_CART_LIST_PAGE;
+	}	
+} else { // 1 argument only, assume URL
+	if ($defaulturl <> "") {
+		$url = $defaulturl;
+	} else {
+		$url = EWPP_CART_LIST_PAGE;
+	}
+}
+header("Location: ". $url);
+exit();
+?>
